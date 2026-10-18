@@ -1,0 +1,22 @@
+# Eigene, ausgefuellte Einstellungen (WLAN-Passwort, Funkschluessel, vCard) NIE hochladen.
+# Die Dateien im Repository enthalten nur Platzhalter. Am besten die eigene Arbeitskopie
+# ausserhalb dieses Ordners halten.
+
+# Arduino
+build/
+*.bin
+*.elf
+
+# Android Studio
+*.apk
+*.aab
+*.jks
+*.keystore
+local.properties
+.gradle/
+.idea/
+captures/
+
+# Sonstiges
+.DS_Store
+Thumbs.db
