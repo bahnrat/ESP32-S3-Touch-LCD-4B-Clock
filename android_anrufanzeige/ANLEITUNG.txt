@@ -1,0 +1,85 @@
+ANRUFANZEIGE - Android-App fuer die Bahnhofsuhr (Waveshare)
+=========================================================
+
+Was die App macht
+  Sie hoert auf eingehende Anrufe und schickt Nummer, Name aus den Kontakten und die SIM-Karte
+  verschluesselt per Bluetooth an das Waveshare. Das Waveshare zeigt den roten Anrufbildschirm.
+  Eingehende SMS reicht sie ebenfalls weiter (Absender bzw. Kontaktname und Text, bis rund 170 Zeichen).
+  Das Waveshare zeigt sie auf einem blauen Bildschirm, einen Code aus 5 bis 8 Ziffern (oder 4) gross.
+  Das Handy muss dafuer nicht entsperrt sein.
+  Die App laeuft als Dienst im Vordergrund (Symbol in der Statusleiste) und verbindet sich selbst
+  neu, wenn das Waveshare in Reichweite kommt.
+
+Voraussetzungen
+  - Das Waveshare ist mit dem Handy bereits GEKOPPELT (hast du mit nRF Connect gemacht).
+  - Android Studio ist installiert, das Handy hat Android 13 oder neuer (S24U: ja).
+
+Projekt anlegen (einmalig)
+  1. Android Studio -> New Project -> "Empty Views Activity" (oder "Empty Activity").
+  2. Name:          Anrufanzeige
+     Package name:  de.bahnhofsuhr.anruf        (GENAU so, sonst passen die Dateien nicht)
+     Language:      Kotlin
+     Minimum SDK:   API 33 (Android 13)
+     -> Finish. Warten, bis unten "Gradle sync" fertig ist.
+  3. Links in der Projektansicht (Ansicht "Project" oder "Android"):
+       app/src/main/AndroidManifest.xml   -> Inhalt komplett ersetzen durch die mitgelieferte Datei
+       app/src/main/java/de/bahnhofsuhr/anruf/MainActivity.kt   -> Inhalt komplett ersetzen
+       Neue Datei AnrufDienst.kt im selben Ordner anlegen (Rechtsklick auf den Ordner ->
+       New -> Kotlin Class/File -> "AnrufDienst") und den Inhalt der mitgelieferten Datei einfuegen.
+  4. Handy per USB anschliessen (Entwickleroptionen + USB-Debugging am Handy einschalten),
+     oben das Handy auswaehlen, auf den gruenen Pfeil (Run) klicken.
+
+Einrichten in der App
+  1. "1. Berechtigungen erlauben" -> alle Fragen mit "Zulassen" bestaetigen
+     (Telefon, Anrufliste, Kontakte, SMS, Geraete in der Naehe, Benachrichtigungen).
+     Sperrt Android die SMS-Berechtigung ("Eingeschraenkte Einstellung"):
+     Einstellungen -> Apps -> Anrufanzeige -> Menue (drei Punkte oben rechts)
+     -> "Eingeschraenkte Einstellungen zulassen", danach die Berechtigung erneut erteilen.
+  2. "2. Waveshare auswaehlen" -> "Bahnhofsuhr" antippen.
+  3. "3. Dienst starten". Im Status soll "Bereit (verbunden)" stehen.
+  4. "Testanruf senden" -> auf dem Waveshare erscheint der Anrufbildschirm.
+  5. "Test-SMS senden" -> auf dem Waveshare erscheint die SMS mit dem Code 482915.
+     Im Status der App steht "SMS-Empfang: an", wenn die Berechtigung erteilt ist.
+
+Fritz!Fon-Anrufe (FRITZ!App Fon)  -  TESTVERSION
+  Die FRITZ!App Fon telefoniert ueber das WLAN und meldet Android keinen normalen Anruf. Deshalb liest
+  die App deren Anruf-Benachrichtigung mit und gibt sie wie einen normalen Anruf ans Waveshare weiter.
+  Neue Datei: FritzListener.kt (im selben Ordner wie AnrufDienst.kt anlegen). AndroidManifest.xml,
+  AnrufDienst.kt und MainActivity.kt ersetzen.
+  Einrichten:
+    1. App neu bauen und installieren, "3. Dienst starten".
+    2. "4. Fritz!Fon: Benachrichtigungszugriff erlauben" -> in der Liste "Anrufanzeige (Fritz!Fon)"
+       einschalten. Sperrt Android das ("Eingeschraenkte Einstellung"): Einstellungen -> Apps ->
+       Anrufanzeige -> Menue (drei Punkte) -> "Eingeschraenkte Einstellungen zulassen", dann erneut.
+    3. Im Status der App soll "Fritz!Fon-Erkennung: Zugriff erlaubt" stehen.
+    4. Mit einem Festnetzanruf auf die Fritz!Box testen (das Handy muss in der FRITZ!App Fon
+       angemeldet sein, die App muss dafuer laufen).
+  Wenn nichts erscheint: "Fritz-Diagnose an/aus" antippen, noch einmal anrufen lassen und mir die Zeilen
+  "Gesehene Apps" und "Letzte Fritz-Meldung" schicken (Nummern vorher durch xxx ersetzen). Dann passe ich
+  die Erkennung an. Die Diagnose ist standardmaessig aus und haelt alles nur im Arbeitsspeicher.
+  Datenschutz: Die App bekommt mit dem Benachrichtigungszugriff technisch alle Benachrichtigungen,
+  wertet aber nur Apps mit "fritz" oder "avm" im Paketnamen aus. Alles andere wird sofort verworfen,
+  nichts wird gespeichert oder protokolliert.
+
+Update einer bereits installierten App
+  Neu bauen und ueber die alte App drueberinstallieren (Run in Android Studio). Die Kopplung bleibt.
+  Dann "1. Berechtigungen erlauben" erneut antippen (die SMS-Frage kommt neu) und,
+  falls noetig, "3. Dienst starten".
+
+Wichtig fuer den Dauerbetrieb (Samsung)
+  Einstellungen -> Apps -> Anrufanzeige -> Akku -> "Unbegrenzt" (nicht optimieren).
+  Sonst beendet das System den Dienst nach einiger Zeit.
+
+Wenn die SIM-Karte falsch oder gar nicht erkannt wird
+  In der App steht unter "Technik" eine Liste der Zusatzangaben, die Android mitschickt.
+  Schick mir diese Zeile (ohne Nummer), dann passe ich die Erkennung an.
+
+Datenschutz
+  Nummer, Name und SMS-Text gehen nur per verschluesseltem Bluetooth an das gekoppelte Waveshare.
+  Es gibt keine Internetverbindung in der App.
+  Der SMS-Text wird in der App weder gespeichert noch protokolliert (die Statuszeile zeigt nur
+  Uhrzeit und Laenge). Die App darf SMS nur empfangen (RECEIVE_SMS), nicht lesen oder senden.
+  Auf dem Waveshare wird der Text nicht gespeichert und nicht in der seriellen Ausgabe ausgegeben;
+  er verschwindet nach 60 Sekunden (BLE_SMS_SEKUNDEN) oder beim Antippen.
+  Hinweis: Waehrend ein Anruf angezeigt wird, erscheint eine eingehende SMS nicht.
+  Es werden nur normale SMS weitergegeben, keine RCS-/Chat-Nachrichten.
