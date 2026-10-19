@@ -12,20 +12,20 @@ Eine Bahnhofsuhr, die zugleich ein **PIN-geschützter TOTP-Generator ohne Intern
 
 - **Bahnhofsuhr** mit schleichendem Sekundenzeiger (wahlweise Lochzeiger oder einfacher sekundenzeiger), quadratischem oder rundem Zifferblatt,
 - **Schweizer Kellenzeiger** und Telenorma-Logo sind aus lizenzrechtlichen Gründen nicht enthalten.
-- **TOTP-Codes** (Zwei-Faktor) offline; Konten anzeigen, umbenennen, löschen; Schutz durch **PIN**
-- **Zeit stellen**, automatischer Abgleich per WLAN/NTP beim Start, Echtzeituhr (PCF85063)
-- **QR-Code** mit einer vCard (Visitenkarte)
+- **TOTP-Generator** Autarker offline Generator ohne Internetverbindung. Daher nicht von außen angreifbar; Konten anzeigen, umbenennen, löschen; Schutz durch **PIN** (Generator orientiert sich an den TOTP-Generatoren von Reiner-SCT).
+- **Zeit stellen**, Die Uhrzeit wird per WLAN/NTP beim Start aktuelasiert, Echtzeituhr (PCF85063).
+- **QR-Code** Kann mit vCard (Visitenkarte) beschrieben werden.
 - **Wetter** (Open-Meteo, ohne Schlüssel) als alternativer Startbildschirm
 - **Herunterfahren** und Akku-/Netzteil-Erkennung
-- **Neue Konten per Funk**: eine AtomS3R-CAM scannt den QR-Code des Kontos und sendet ihn **verschlüsselt**
+- **Neue Konten per Funk**: Mit einer AtomS3R-CAM werden die QR-Code des Kontos eingelesen und **verschlüsselt** an das waveshare gesendet
   (AES-128-GCM über ESP-NOW) an die Anzeige – siehe [docs/KAMERA.md](docs/KAMERA.md)
-- **Bluetooth-Anrufanzeige** (verschlüsselt gekoppelt): eingehende **Anrufe** und **SMS** auf dem Display,
-  mit **Ton** und Lautstärkeregler, auch bei gesperrtem Handy – per Android-App; **FRITZ!App Fon**-Anrufe
-  werden mit erkannt; iPhone-Modus (ohne App, ungetestet) – siehe [docs/ANRUFANZEIGE.md](docs/ANRUFANZEIGE.md)
-- **Einrichtung per Handy/PC:** WLAN-Netze, Zeitzone, Wetter-Ort, Anzeige, Ton und vCard über eine Weboberfläche ändern
+- **Bluetooth-Anrufanzeige** (verschlüsselt gekoppelt): Eingehende **Anrufe** und **SMS** werden auf dem Display angezeigt,
+  wahlweise mit **Ton** (Lautstärkeregler kann angepasst werden), auch bei gesperrtem Handy – per Android-App; **FRITZ!App Fon**-Anrufe
+  werden auch erkannt; iPhone-Modus (ohne App, ungetestet) – siehe [docs/ANRUFANZEIGE.md](docs/ANRUFANZEIGE.md)
+- **Einrichtung per Handy/PC:** WLAN-Netze, Zeitzone, Wetter-Ort, Anzeige, Ton und vCard können über eine Weboberfläche geändern werden.
   (WLAN nur für einige Minuten an) – siehe [docs/EINRICHTUNG.md](docs/EINRICHTUNG.md)
 - **Helligkeitsregler** im Hauptmenü
-- Bildschirmfoto per USB ([tools/bildschirmfoto.py](tools/bildschirmfoto.py))
+- Es können **Bildschirmfoto** vom aktuellen Sreen per USB auf PC gespeichert werden. ([tools/bildschirmfoto.py](tools/bildschirmfoto.py))
 
 ## Aufbau des Repositorys
 
