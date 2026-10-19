@@ -10,7 +10,7 @@ Eine Bahnhofsuhr, die zugleich ein **PIN-geschützter TOTP-Generator ohne Intern
 
 ## Was es kann
 
-- **Bahnhofsuhr** mit schleichendem Sekundenzeiger (wahlweise Lochzeiger oder einfacher sekundenzeiger), quadratischem oder rundem Zifferblatt,
+- **Bahnhofsuhr** mit schleichendem Sekundenzeiger (wahlweise Lochzeiger oder einfacher Sekundenzeiger), quadratischem oder rundem Zifferblatt,
 - **Schweizer Kellenzeiger** und Telenorma-Logo sind aus lizenzrechtlichen Gründen nicht enthalten.
 - **TOTP-Generator**: Autarker offline Generator ohne Internetverbindung. Daher nicht von außen angreifbar; Konten anzeigen, umbenennen, löschen; Schutz durch **PIN** (Generator orientiert sich an den TOTP-Generatoren von Reiner-SCT).
 - **Zeit stellen**: Die Uhrzeit wird per WLAN/NTP beim Start aktualisiert, Echtzeituhr (PCF85063).
