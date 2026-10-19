@@ -67,6 +67,7 @@ Werte lassen sich später auch am Gerät über die Weboberfläche ändern.
 - TOTP-Geheimnisse (secrets), WLAN-Zugangsdaten und der Funkschlüssel liegen **unverschlüsselt im Flash**.
   Die PIN schützt die Bedienung, **nicht** den Speicher. Die Flash-Verschlüsselung des ESP32 ist nicht eingerichtet.
   Wer das Gerät in die Hand bekommt und auslesen kann, kommt an die Geheimnisse.
+- WLAN wird nur bei Bedarf aktiviert (Bei Systemstart, für Wetteraktualisierung und für Einstellungen per Browser).  
 - Den Funkschlüssel (`konfiguration_funk.h`) **selbst erzeugen**; solange er nur aus Nullen besteht, sendet die Kamera nichts.
 - Die Android-App benötigt für die Fritz!Fon-Erkennung den **Benachrichtigungszugriff**. Sie wertet nur Apps mit „fritz“
   oder „avm“ im Namen aus, verwirft alles andere und speichert/protokolliert nichts.
