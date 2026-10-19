@@ -12,10 +12,10 @@ Eine Bahnhofsuhr, die zugleich ein **PIN-geschützter TOTP-Generator ohne Intern
 
 - **Bahnhofsuhr** mit schleichendem Sekundenzeiger (wahlweise Lochzeiger oder einfacher sekundenzeiger), quadratischem oder rundem Zifferblatt,
 - **Schweizer Kellenzeiger** und Telenorma-Logo sind aus lizenzrechtlichen Gründen nicht enthalten.
-- **TOTP-Generator** Autarker offline Generator ohne Internetverbindung. Daher nicht von außen angreifbar; Konten anzeigen, umbenennen, löschen; Schutz durch **PIN** (Generator orientiert sich an den TOTP-Generatoren von Reiner-SCT).
-- **Zeit stellen**, Die Uhrzeit wird per WLAN/NTP beim Start aktualisiert, Echtzeituhr (PCF85063).
-- **QR-Code** Kann mit vCard (Visitenkarte) beschrieben werden.
-- **Wetter** (Open-Meteo, ohne Schlüssel) als alternativer Startbildschirm
+- **TOTP-Generator**: Autarker offline Generator ohne Internetverbindung. Daher nicht von außen angreifbar; Konten anzeigen, umbenennen, löschen; Schutz durch **PIN** (Generator orientiert sich an den TOTP-Generatoren von Reiner-SCT).
+- **Zeit stellen**: Die Uhrzeit wird per WLAN/NTP beim Start aktualisiert, Echtzeituhr (PCF85063).
+- **QR-Code**: Kann mit vCard (Visitenkarte) beschrieben werden.
+- **Wetter**: (Open-Meteo, ohne Schlüssel) als alternativer Startbildschirm
 - **Herunterfahren** und Akku-/Netzteil-Erkennung
 - **Neue Konten per Funk**: Mit einer AtomS3R-CAM werden die QR-Code des Kontos eingelesen und **verschlüsselt** an das waveshare gesendet
   (AES-128-GCM über ESP-NOW) an die Anzeige – siehe [docs/KAMERA.md](docs/KAMERA.md)
@@ -25,7 +25,7 @@ Eine Bahnhofsuhr, die zugleich ein **PIN-geschützter TOTP-Generator ohne Intern
 - **Einrichtung per Handy/PC:** WLAN-Netze, Zeitzone, Wetter-Ort, Anzeige, Ton und vCard können über eine Weboberfläche geändern werden.
   (WLAN nur für einige Minuten an) – siehe [docs/EINRICHTUNG.md](docs/EINRICHTUNG.md)
 - **Helligkeitsregler** im Hauptmenü
-- Es können **Bildschirmfoto** vom aktuellen Sreen per USB auf PC gespeichert werden. ([tools/bildschirmfoto.py](tools/bildschirmfoto.py))
+- Es können **Bildschirmfotos** vom aktuellen Sreen per USB auf PC gespeichert werden. ([tools/bildschirmfoto.py](tools/bildschirmfoto.py))
 
 ## Aufbau des Repositorys
 
