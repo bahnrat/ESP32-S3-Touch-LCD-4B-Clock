@@ -64,7 +64,7 @@ Werte lassen sich später auch am Gerät über die Weboberfläche ändern.
 ## Wichtige Hinweise
 
 **Sicherheit**
-- TOTP-Geheimnisse, WLAN-Zugangsdaten und der Funkschlüssel liegen **unverschlüsselt im Flash**.
+- TOTP-Geheimnisse (secrets), WLAN-Zugangsdaten und der Funkschlüssel liegen **unverschlüsselt im Flash**.
   Die PIN schützt die Bedienung, **nicht** den Speicher. Die Flash-Verschlüsselung des ESP32 ist nicht eingerichtet.
   Wer das Gerät in die Hand bekommt und auslesen kann, kommt an die Geheimnisse.
 - Den Funkschlüssel (`konfiguration_funk.h`) **selbst erzeugen**; solange er nur aus Nullen besteht, sendet die Kamera nichts.
