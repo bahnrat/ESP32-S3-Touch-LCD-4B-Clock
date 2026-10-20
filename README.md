@@ -18,7 +18,7 @@ Eine Bahnhofsuhr, die zugleich ein **PIN-geschützter TOTP-Generator ohne Intern
 - **Wetter**: (Open-Meteo, ohne Schlüssel) als alternativer Startbildschirm
 - **Herunterfahren** und Akku-/Netzteil-Erkennung
 - **Neue Konten per Funk**: Mit einer AtomS3R-CAM werden die QR-Code des Kontos eingelesen und **verschlüsselt** an das waveshare gesendet
-  (AES-128-GCM über ESP-NOW) an die Anzeige – siehe [docs/KAMERA.md](docs/KAMERA.md)
+  (AES-128-GCM über ESP-NOW) – siehe [docs/KAMERA.md](docs/KAMERA.md)
 - **Bluetooth-Anrufanzeige** (verschlüsselt gekoppelt): Eingehende **Anrufe** und **SMS** werden auf dem Display angezeigt,
   wahlweise mit **Ton** (Lautstärkeregler kann angepasst werden), auch bei gesperrtem Handy – per Android-App; **FRITZ!App Fon**-Anrufe
   werden auch erkannt; iPhone-Modus (ohne App, ungetestet) – siehe [docs/ANRUFANZEIGE.md](docs/ANRUFANZEIGE.md)
