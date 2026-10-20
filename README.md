@@ -1,4 +1,4 @@
-8# Bahnhofsuhr + TOTP-Generator für das Waveshare ESP32-S3-Touch-LCD-4B
+**Bahnhofsuhr + TOTP-Generator für das Waveshare ESP32-S3-Touch-LCD-4B**
 
 *In short (English):* A stand-alone station clock with a PIN-protected, offline TOTP (2FA) code generator for the
 Waveshare ESP32-S3-Touch-LCD-4B (480×480 touch display). Optional extras: weather, QR-code business card,
