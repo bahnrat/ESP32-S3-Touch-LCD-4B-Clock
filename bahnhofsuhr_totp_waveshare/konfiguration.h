@@ -56,3 +56,7 @@ const bool NACH_START_UHR_ZEIGEN = true;
 // #define HELLIGKEIT_REGLER_EINBAUEN 0   // 0 = Regler weglassen
 // #define HELLIGKEIT_PWM_INVERTIERT 0    // 0, falls der Regler verkehrt herum wirkt (Standard: 1)
 // #define HELLIGKEIT_PWM_HZ 5000         // PWM-Frequenz, falls das Bild bei niedriger Helligkeit flackert
+
+// Akkubetrieb: Display nach so vielen Sekunden ohne Beruehrung ausschalten (0 = nie).
+// Mit Netzteil/USB bleibt es an. Voreinstellung: 30. Zum Aendern die Zeile aktivieren:
+// #define BATTERIE_DISPLAY_AUS_SEKUNDEN 30
