@@ -1546,6 +1546,13 @@ void axpAbschalten() {
 // Register 0x90 Bit 7). Zusaetzlich wird ein schwarzer Bildschirm geladen, damit das Display
 // auch dunkel ist, falls die Beleuchtung doch nicht abschaltet.
 lv_obj_t *aus_screen = NULL;
+lv_obj_t *ausWiederScreen = NULL; // Bild, das beim Einschalten wieder erscheint (NULL = Wetter-Startbild)
+
+// Akkubetrieb: Display nach so vielen Sekunden ohne Beruehrung ausschalten (0 = nie).
+// Mit Netzteil/USB bleibt es bei den bisherigen Zeiten. Aenderbar in der konfiguration.h.
+#ifndef BATTERIE_DISPLAY_AUS_SEKUNDEN
+#define BATTERIE_DISPLAY_AUS_SEKUNDEN 30
+#endif
 
 void bildschirmAusschalten() {
     if (aus_screen == NULL) {
@@ -1559,7 +1566,7 @@ void bildschirmAusschalten() {
     if (axpLesen(0x90, &v)) axpSchreiben(0x90, v & (uint8_t)~0x80);
     helligkeitPwmPause(true);
     bildschirmIstAus = true;
-    Serial.println("Display aus (Wetter-Startbild, Timeout).");
+    Serial.println("Display aus.");
 }
 
 void bildschirmEinschalten() {
@@ -1567,7 +1574,12 @@ void bildschirmEinschalten() {
     if (axpLesen(0x90, &v)) axpSchreiben(0x90, v | 0x80);
     helligkeitPwmPause(false);
     bildschirmIstAus = false;
-    zeigeWetterStart(); // schaltet das Wetter-Startbild wieder auf
+    if (ausWiederScreen != NULL) {   // Display wurde im Akkubetrieb ausgeschaltet: Bild wieder zeigen
+        lv_screen_load(ausWiederScreen);
+        ausWiederScreen = NULL;
+    } else {
+        zeigeWetterStart(); // schaltet das Wetter-Startbild wieder auf
+    }
     lv_display_trigger_activity(NULL);
     Serial.println("Display ein.");
 }
@@ -4211,9 +4223,30 @@ void loop() {
     // Waehrend der Ersteinrichtung gibt es keinen sinnvollen Timeout-Zielzustand.
     if (aktuellerStatus == STATUS_PIN_EINRICHTEN) return;
 
+#if BATTERIE_DISPLAY_AUS_SEKUNDEN > 0
+    // Akkubetrieb: Display nach kurzer Inaktivitaet ausschalten (spart Akku). Vorher wird wie beim
+    // normalen Timeout gesperrt bzw. zum Startzustand zurueckgekehrt (kein offener TOTP-Code).
+    if (!bildschirmIstAus && aktuellerStatus != STATUS_KONTO_HINZUFUEGEN &&
+        lv_display_get_inactive_time(NULL) >= (uint32_t)BATTERIE_DISPLAY_AUS_SEKUNDEN * 1000UL) {
+        static unsigned long letztePruefung = 0;
+        if (millis() - letztePruefung >= 1000) {
+            letztePruefung = millis();
+            if (!netzteilAngeschlossen()) {
+                if (aktuellerStatus != STATUS_HAUPTMENUE && aktuellerStatus != STATUS_UHR_LAEUFT &&
+                    aktuellerStatus != STATUS_WETTER_START) {
+                    aktualisiereTimeout();
+                }
+                ausWiederScreen = (aktuellerStatus == STATUS_WETTER_START) ? NULL : lv_screen_active();
+                Serial.println("Akkubetrieb: Display aus nach Inaktivitaet.");
+                bildschirmAusschalten();
+            }
+        }
+    }
+#endif
+
     // Wetter als Startbild: kein normaler Timeout; nach 2 Minuten optional Display aus
     if (aktuellerStatus == STATUS_WETTER_START || bildschirmIstAus) {
-        wetterAutomatischAktualisieren();
+        if (aktuellerStatus == STATUS_WETTER_START) wetterAutomatischAktualisieren();
         if (we.wetterAusTimeout && !bildschirmIstAus &&
             lv_display_get_inactive_time(NULL) >= TIMEOUT_ZEIT) {
             bildschirmAusschalten();
