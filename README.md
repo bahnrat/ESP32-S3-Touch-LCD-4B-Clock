@@ -25,6 +25,7 @@ Eine Bahnhofsuhr, die zugleich ein **PIN-geschützter TOTP-Generator ohne Intern
 - **Einrichtung per Handy/PC:** WLAN-Netze, Zeitzone, Wetter-Ort, Anzeige, Ton und vCard können über eine Weboberfläche geändern werden.
   (WLAN nur für einige Minuten an) – siehe [docs/EINRICHTUNG.md](docs/EINRICHTUNG.md)
 - **Helligkeitsregler** im Hauptmenü
+- Im Akkubetrieb schaltet das Display nach 30 Sekunden ohne Berührung ab. Das soll den Akku schonen.
 - Es können **Bildschirmfotos** vom aktuellen Screen per USB auf PC gespeichert werden. ([tools/bildschirmfoto.py](tools/bildschirmfoto.py))
 
 ## Aufbau des Repositorys
